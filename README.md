@@ -27,5 +27,8 @@ Após finalizar essa operação é possível observar que foi criado uma pasta `
 
 Rodando o comando `yarn storybook:serve` o Storybook abre uma nova aba na porta 6006, onde é possível ver no canto direito as variantes do MyButton e iteragir com ele via canvas.
 
-Abrindo o index.stories.js podemos ver que ele exporta 3 constantes, cada uma com uma variação do MyButton, é possível tanto exportar via template, como via JSX com o método render, a fim de simplificação iremos usar apelas o modo de template.
+Abrindo o index.stories.js podemos ver que ele exporta 3 constantes, cada uma com uma variação do MyButton, é possível tanto exportar via template string, como via JSX com o método render, a fim de simplificação iremos usar apelas o modo de template string.
 
+### Escrevendo histórias
+
+Agora vamos escrever nossa primeira história, vamos criar um input que iremos chamar de `StoryInput` (o código está em `src/components/StoryInput.vue`), no arquivo `StoryInput.stories.js` basta importar o componente Vue, e exportar como default um objeto com o nome que você deseja que apareca na sua lista de stories e o componente, após isso basta exportar n constantes com cada variante do objeto, no caso exportamos tanto uma variante com placeholder, como uma sem placeholder.
