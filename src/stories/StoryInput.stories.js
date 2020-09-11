@@ -15,3 +15,5 @@ export const semPlaceholder = () => ({
     components: {StoryInput},
     template: '<story-input />'
 })
+
+semPlaceholder.story = {name: "Esse é o input sem placeholder"}
