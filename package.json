@@ -1,6 +1,6 @@
 {
   "name": "vuejs-storybook-input",
-  "version": "0.1.4",
+  "version": "0.1.7",
   "main": "./dist/vuejs-storybook-input.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",

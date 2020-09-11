@@ -1,12 +1,28 @@
-import Vue from 'vue'
-import StoryInput from './components/StoryInput.vue'
+// Importa o componente
+import component from  './components/StoryInput.vue';
 
-const Components = {
-  StoryInput,
+// Declara a função de instalação executada pelo Vue.use()
+export function install(Vue) {
+  if (install.installed) return;
+  install.installed = true;
+  Vue.component('StoryInput', component);
+}
+
+// Cria a definição do módulo para Vue.use()
+const plugin = {
+  install,
 };
 
-Object.keys(Components).forEach(name => {
-  Vue.component(name, Components[name]);
-});
+// Auto-instala quando o Vue é encontrado (no navegador via <script>)
+let GlobalVue = null;
+if (typeof window !== 'undefined') {
+  GlobalVue = window.Vue;
+} else if (typeof global !== 'undefined') {
+  GlobalVue = global.Vue;
+}
+if (GlobalVue) {
+  GlobalVue.use(plugin);
+}
 
-export default Components;
+// Para permitir o uso como um módulo exportável (npm/webpack/etc.)
+export default component;
