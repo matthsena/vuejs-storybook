@@ -51,3 +51,23 @@ semPlaceholder.story = {name: "Esse é o input sem placeholder"}
 ```
 
 Agora o nome da nossa story é `Esse é o input sem placeholder`
+
+### Decorators
+
+Decorators permite que envolvamos nossa story com elementos HTML, sem necessáriamente alterar o component, isso abre um leque de oportunidades, e.g. alterar a cor de fundo e adicionar margin/padding. Basta adicionar a propriedade `decorators` ao export default da story da seguinte forma:
+
+```javascript
+export default {
+    title: 'Story Input',
+    component: StoryInput,
+    decorators: [() => "<div style='padding: 3rem; background: #000'><story/></div>"]
+}
+```
+
+A tag `<story/>` é obrigatória, sem ela é impossível renderizar nosso componente, também existe a posibilidade de adicionar o decorator individualmente sobreescrevendo a propriedade story:
+
+```javascript
+semPlaceholder.story = {name: "Esse é o input sem placeholder", decorators: [() => "<div style='padding: 3rem; background: #000'><story/></div>"]}
+```
+
+

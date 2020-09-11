@@ -2,7 +2,8 @@ import StoryInput from '../components/StoryInput.vue'
 
 export default {
     title: 'Story Input',
-    component: StoryInput
+    component: StoryInput,
+    decorators: [() => "<div style='padding: 3rem; background: #000'><story/></div>"]
 }
 
 export const comPlaceholder = () => ({
