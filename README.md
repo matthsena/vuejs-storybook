@@ -6,7 +6,7 @@
 ## O que é o Storybook?
 
 <center>
-  <img src="https://raw.githubusercontent.com/storybookjs/storybook/master/media/storybook-intro.gif" width="70%" />
+  <img src="https://raw.githubusercontent.com/storybookjs/storybook/master/media/storybook-intro.gif" width="100%" />
 </center>
 
 
