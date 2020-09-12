@@ -1,8 +1,14 @@
 # Vue.js e Storybook
+[![Tela do Storybook](doc/vuestory.png "Tela do Storybook")](doc/vuestory.png "Tela do Storybook")
 
 > Criando, visualizando e publicando componentes Vue.js no NPM com o Storybook
 
 ## O que é o Storybook?
+
+<center>
+  <img src="https://raw.githubusercontent.com/storybookjs/storybook/master/media/storybook-intro.gif" width="70%" />
+</center>
+
 
 [Storybook](https://storybook.js.org/) é uma ferramenta Open Source que ajuda a desenvolver componentes de interface de forma isolada, ou seja, com o uso do Storybook é possível trabalhar em apenas um componente por vez, abstraindo qualquer stack complexa, e testá-los sem a necessidade de navegar entre telas.
 
