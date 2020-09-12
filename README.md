@@ -118,20 +118,19 @@ semPlaceholder.story = {name: "Esse é o input sem placeholder", decorators: [()
 
 ## Publicando seu componente Vue no NPM
 
-Publicar um componente Vue no NPM pode parecer uma tarefa complexa mas é mais simples do que parece, antes de tudo você precisa criar uma conta no NPM em https://www.npmjs.com/ e realizar o login via linha de comando.
+Publicar um componente Vue no NPM pode parecer uma tarefa complexa mas é mais simples do que parece, antes de tudo você precisa criar uma conta no NPM em https://www.npmjs.com e realizar o login via linha de comando.
 
 ```properties
 foo@bar:~$ npm login
 ```
 
-Após vamos configurar para que o VueJS não faça a extração do CSS, por que isso? Porque se não o fizermos, todo o estilo que foi escrito no nosso componente será extraido e ignorado quando instalado em outros projetos, vamos criar na raiz do projeto um arquivo `vue.config.js`
+Após isso, vamos configurar para que o VueJS não faça a extração do CSS, por que isso? Porque se não o fizermos, todo o estilo que foi escrito no nosso componente será extraido e ignorado quando instalado em outros projetos, basta criar na raiz do projeto um arquivo `vue.config.js` e incluir o seguinte código:
 
 ```js
 module.exports = {
     css: { extract: false }
 }
 ```
-
 Para que nosso componente possa ser amplamente usado devemos publicar ele no NPM como um módulo CommonJS/UMD, para isso vamos criar um arquivo `src/index.js` que cuidará da exportação e a instalação automática do módulo CommonJS/UMD.
 
 ```js
@@ -165,7 +164,7 @@ if (GlobalVue) {
 export default component;
 ```
 
-Agora o só falta editar o `package.json`, fazer o build e publicar no NPM, para isso adicione as seguintes informações ao `package.json`
+Agora o só falta editar o package.json, fazer o build e publicar no NPM, para isso adicione as seguintes informações ao `package.json`
 ``` json
   "main": "./dist/vuejs-storybook-input.common.js",
   "scripts": {
@@ -182,7 +181,9 @@ Agora o só falta editar o `package.json`, fazer o build e publicar no NPM, para
 ```
 **Além disso remova a propriedade `private`, ou mude de true para false**
 
-o `vuejs-storybook-input` é totalmente moldável para nome que você escolher para seu pacote, nesse exemplo vamos utilizar o proprio, note que adicionamos um endereço para o atributo **main**, isso mostrará para o NPM qual é o arquivo padrão que deve ser utilizado nos imports, além disso adicionamos o atributo **files**, ele mostra quais são os diretórios que queremos enviar para o NPM, no caso apenas o `dist/` e por fim temos a inserção do script **build:npm** que compilará nosso Single-File Component para um módulo CommonJS/UMD.
+o `vuejs-storybook-input` é totalmente moldável para nome que você escolher para seu pacote, nesse exemplo vamos utilizar o próprio.
+
+Note que adicionamos um endereço para o atributo **main**, isso mostrará para o NPM qual é o arquivo padrão que deve ser incorporado nos imports, além disso adicionamos o atributo **files**, ele mostra quais são os diretórios que queremos enviar para o NPM, no caso apenas o `dist/` e por fim temos a inserção do script **build:npm** que compilará nosso Single-File Component para um módulo CommonJS/UMD.
 
 Basta rodar o comando
 
@@ -190,12 +191,12 @@ Basta rodar o comando
 foo@bar:~$ yarn build:npm && npm publish
 ```
 
-Pronto, seu pacote está disponível no NPM!!
+Pronto, seu componente está disponível no NPM!!
 
 
-### Como usar o pacote em 3 passos
+### Como usar o componente em 3 passos:
 
-Irei demonstrar agora como utilizar esse pacote em outro projeto
+Irei demonstrar agora como utilizar esse componente em outro projeto
 
 
 1. Crie um novo projeto vue
