@@ -145,3 +145,34 @@ foo@bar:~$ yarn build:npm && npm publish
 ```
 
 Pronto, seu pacote está disponível no NPM!!
+
+
+### Como usar o pacote em 3 passos
+
+Irei demonstrar agora como utilizar esse pacote em outro projeto
+
+
+1. Crie um novo projeto vue
+
+```properties
+foo@bar:~$ vue create sample
+```
+
+2. Instale seu pacote
+
+```properties
+foo@bar:~$ yarn add vuejs-storybook-input
+```
+
+3. Importe e registre o componente
+
+```js
+<script>
+import StoryInput from 'vuejs-storybook-input'
+export default {
+  components: {
+    StoryInput
+  }
+}
+</script>
+```
