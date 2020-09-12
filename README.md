@@ -70,4 +70,78 @@ A tag `<story/>` é obrigatória, sem ela é impossível renderizar nosso compon
 semPlaceholder.story = {name: "Esse é o input sem placeholder", decorators: [() => "<div style='padding: 3rem; background: #000'><story/></div>"]}
 ```
 
+## Publicando seu componente Vue no NPM
 
+Publicar um componente Vue no NPM pode parecer uma tarefa complexa mas é mais simples do que parece, antes de tudo você precisa criar uma conta no NPM em https://www.npmjs.com/ e realizar o login via linha de comando.
+
+```properties
+foo@bar:~$ npm login
+```
+
+Após vamos configurar para que o VueJS não faça a extração do CSS, por que isso? Porque se não o fizermos, todo o estilo que foi escrito no nosso componente será extraido e ignorado quando instalado em outros projetos, vamos criar na raiz do projeto um arquivo `vue.config.js`
+
+```js
+module.exports = {
+    css: { extract: false }
+}
+```
+
+Para que nosso componente possa ser amplamente usado devemos publicar ele no NPM como um módulo CommonJS/UMD, para isso vamos criar um arquivo `src/index.js` que cuidará da exportação e a instalação automática do módulo CommonJS/UMD.
+
+```js
+// Importa o componente
+import component from  './components/StoryInput.vue';
+
+// Declara a função de instalação executada pelo Vue.use()
+export function install(Vue) {
+  if (install.installed) return;
+  install.installed = true;
+  Vue.component('StoryInput', component);
+}
+
+// Cria a definição do módulo para Vue.use()
+const plugin = {
+  install,
+};
+
+// Auto-instala quando o Vue é encontrado (no navegador via <script>)
+let GlobalVue = null;
+if (typeof window !== 'undefined') {
+  GlobalVue = window.Vue;
+} else if (typeof global !== 'undefined') {
+  GlobalVue = global.Vue;
+}
+if (GlobalVue) {
+  GlobalVue.use(plugin);
+}
+
+// Para permitir o uso como um módulo exportável (npm/webpack/etc.)
+export default component;
+```
+
+Agora o só falta editar o `package.json`, fazer o build e publicar no NPM, para isso adicione as seguintes informações ao `package.json`
+``` json
+  "main": "./dist/vuejs-storybook-input.common.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "storybook:build": "vue-cli-service storybook:build -c config/storybook",
+    "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook",
+    "build:npm": "vue-cli-service build --target lib --name vuejs-storybook-input ./src/index.js"
+  },
+  "files": [
+    "dist/*"
+  ],
+```
+**Além disso remova a propriedade `private`, ou mude de true para false**
+
+o `vuejs-storybook-input` é totalmente moldável para nome que você escolher para seu pacote, nesse exemplo vamos utilizar o proprio, note que adicionamos um endereço para o atributo **main**, isso mostrará para o NPM qual é o arquivo padrão que deve ser utilizado nos imports, além disso adicionamos o atributo **files**, ele mostra quais são os diretórios que queremos enviar para o NPM, no caso apenas o `dist/` e por fim temos a inserção do script **build:npm** que compilará nosso Single-File Component para um módulo CommonJS/UMD.
+
+Basta rodar o comando
+
+```properties
+foo@bar:~$ yarn build:npm && npm publish
+```
+
+Pronto, seu pacote está disponível no NPM!!
